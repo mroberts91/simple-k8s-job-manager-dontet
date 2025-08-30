@@ -1,0 +1,14 @@
+{
+  "name": "alpine-sleep-test",
+  "containerImage": "alpine:3.22.1",
+  "command": ["sh"],
+  "args": ["-c", "echo 'Starting Alpine container job...' && sleep 30 && echo 'Job completed!'"],
+  "configuration": {
+    "LOG_LEVEL": "INFO",
+    "JOB_TYPE": "test"
+  },
+  "labels": {
+    "app": "test-job",
+    "environment": "dev"
+  }
+}

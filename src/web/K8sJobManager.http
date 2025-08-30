@@ -1,0 +1,6 @@
+@K8sJobManager_HostAddress = http://localhost:5213
+
+GET {{K8sJobManager_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

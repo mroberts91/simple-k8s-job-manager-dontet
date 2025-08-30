@@ -1,0 +1,70 @@
+### Submit a new job (Alpine test)
+POST http://localhost:5213/api/jobs
+Content-Type: application/json
+
+{
+  "name": "alpine-sleep-test",
+  "containerImage": "alpine:3.22.1",
+  "command": ["sh"],
+  "args": ["-c", "echo 'Starting Alpine container job...' && sleep 30 && echo 'Job completed!'"],
+  "configuration": {
+    "LOG_LEVEL": "INFO",
+    "JOB_TYPE": "test"
+  },
+  "labels": {
+    "app": "test-job",
+    "environment": "dev"
+  }
+}
+
+### Get all jobs (with Kubernetes info)
+GET http://localhost:5213/api/jobs
+
+### Get jobs by status
+GET http://localhost:5213/api/jobs?status=Queued
+
+### Get specific job (replace with actual ID)
+GET http://localhost:5213/api/jobs/{{jobId}}
+
+### Refresh Kubernetes info for a specific job
+POST http://localhost:5213/api/jobs/{{jobId}}/refresh-kubernetes-info
+
+### Cancel a job (replace with actual ID)
+DELETE http://localhost:5213/api/jobs/{{jobId}}
+
+### === KUBERNETES RESOURCES ENDPOINTS ===
+
+### Get all Kubernetes jobs
+GET http://localhost:5213/api/kubernetes/jobs
+
+### Get specific Kubernetes job
+GET http://localhost:5213/api/kubernetes/jobs/{{kubernetesJobName}}
+
+### Get pods for a specific Kubernetes job
+GET http://localhost:5213/api/kubernetes/jobs/{{kubernetesJobName}}/pods
+
+### Get complete resource info for a job (job + pods)
+GET http://localhost:5213/api/kubernetes/jobs/{{kubernetesJobName}}/resource-info
+
+### Get all pods
+GET http://localhost:5213/api/kubernetes/pods
+
+### Get specific pod
+GET http://localhost:5213/api/kubernetes/pods/{{podName}}
+
+### Get pod logs
+GET http://localhost:5213/api/kubernetes/pods/{{podName}}/logs
+
+### Get pod logs from specific container
+GET http://localhost:5213/api/kubernetes/pods/{{podName}}/logs?containerName={{containerName}}
+
+### Delete Kubernetes job
+DELETE http://localhost:5213/api/kubernetes/jobs/{{kubernetesJobName}}
+
+### === MONITORING ENDPOINTS ===
+
+### CrystalQuartz Dashboard
+GET http://localhost:5213/quartz
+
+### API Documentation
+GET http://localhost:5213/api-reference
